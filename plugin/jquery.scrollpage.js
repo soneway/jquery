@@ -5,24 +5,6 @@
 (function (window, $) {
 
     $.fn.scrollpage = function (options) {
-        $.fn.scrollpage.defaults = {
-            //滚动动画duration
-            scrollDuration: 800,
-            //内容动画duration
-            duration      : 800,
-            //滚动动画easing
-            scrollEasing  : 'easeInOutCubic',
-            //内容动画easing
-            easing        : 'swing',
-            //是否禁用滚动条
-            isUnscroll    : true,
-            //初始index
-            initIndex     : 0,
-            //是否禁用
-            disable       : false,
-            //滚动回调函数
-            slideCallback : null
-        };
 
         //每个元素执行
         return this.each(function () {
@@ -216,6 +198,24 @@
 
         });
 
+    };
+    $.fn.scrollpage.defaults = {
+        //滚动动画duration
+        scrollDuration: 800,
+        //内容动画duration
+        duration      : 800,
+        //滚动动画easing
+        scrollEasing  : 'easeInOutCubic',
+        //内容动画easing
+        easing        : 'swing',
+        //是否禁用滚动条
+        isUnscroll    : true,
+        //初始index
+        initIndex     : 0,
+        //是否禁用
+        disable       : false,
+        //滚动回调函数
+        slideCallback : null
     };
 
 })(window, $);

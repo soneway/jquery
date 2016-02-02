@@ -5,8 +5,7 @@
 
     $.fn.carousel = function (options) {
 
-        var document = window.document,
-            $doc = $(document),
+        var $doc = $(document),
             isIE = !!window.attachEvent;
 
         //每个元素执行
