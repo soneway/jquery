@@ -1,0 +1,73 @@
+﻿/*carousel 特效样式*/
+//变量
+$jquery-carousel-pager-radius: 4px !default;
+
+.jquery-carousel
+{
+    overflow: hidden;
+    position: relative;
+    @include mx_user-select(none);
+
+    @at-root
+    {
+        /*滚动容器*/
+        .jquery-carousel-wrap
+        {
+            @extend %ph_palt;
+            overflow: hidden;
+
+            .item
+            {
+                display: block;
+                float: left;
+            }
+        }
+
+
+        /*title*/
+        .jquery-carousel-title
+        {
+            @extend %ph_parb;
+            width: 100%;
+            line-height: 1.1;
+            color: #fff;
+            padding: 6px 10px;
+            text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+            background: #000;
+            filter: alpha(opacity=50);
+            background: rgba(#000, 0.5);
+        }
+
+
+        /*pager*/
+        .jquery-carousel-pager
+        {
+            @extend %ph_parb;
+            line-height: 0;
+            padding: $jquery-carousel-pager-radius;
+
+            span
+            {
+                @extend %ph_inlineblock;
+                margin: $jquery-carousel-pager-radius;
+                border: $jquery-carousel-pager-radius solid #999;
+                border-color: rgba(#fff, 0.5);
+                border-radius: 50%;
+                @include mx_box-shadow(0 0 3px rgba(0, 0, 0, 0.5));
+                cursor: pointer;
+
+                &.selected
+                {
+                    @include mx_box-shadow(0 0 3px rgba(0, 0, 0, 0.9));
+                    border-color: #ddd;
+                    border-color: rgba(#fff, 0.9);
+                }
+
+                .vertical &
+                {
+                    display: block;
+                }
+            }
+        }
+    }
+}

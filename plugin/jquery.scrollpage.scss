@@ -1,0 +1,32 @@
+/*
+ * jquery.scrollpage
+ * 滚动页面插件样式
+ */
+
+.jq-scrollpage
+{
+    @extend %ph_palt;
+    @extend %ph_full;
+
+    @at-root
+    {
+        .jq-scrollpage-item
+        {
+            @extend %ph_full;
+            position: relative;
+            overflow: hidden;
+        }
+
+
+        /*禁止窗口滚动条*/
+        .jq-scrollpage-unsroll
+        {
+            overflow: visible;
+
+            body
+            {
+                overflow: hidden;
+            }
+        }
+    }
+}

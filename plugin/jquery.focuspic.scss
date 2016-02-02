@@ -1,0 +1,85 @@
+/*
+jquery.focus
+焦点图样式
+*/
+
+.focuspic_container
+{
+    position: relative;
+    overflow: hidden;
+
+    & *
+    {
+        padding: 0;
+        margin: 0;
+    }
+
+    & img
+    {
+        border: none;
+    }
+}
+
+
+.focuspic_img_container
+{
+    @extend %ph_full;
+}
+
+
+.focuspic_ctrl_container, .focuspic_ctrl, .focuspic_title
+{
+    position: absolute;
+    bottom: 0;
+}
+
+
+.focuspic_ctrl_container
+{
+    right: 0;
+    overflow: hidden;
+    line-height: 20px;
+    font-size: 12px;
+    color: #fff;
+}
+
+
+.focuspic_ctrl_bg
+{
+    height: 20px;
+    overflow: hidden;
+    @include mx_opacity(0.5);
+    background: #000;
+}
+
+
+.focuspic_ctrl
+{
+    right: 5px;
+    border-left: 1px solid #fff;
+
+    & a
+    {
+        padding: 0 5px;
+        border-right: 1px solid #fff;
+        display: block;
+        float: left;
+        text-decoration: none;
+        color: #fff;
+        outline: none;
+        blr: expression(this.onFocus=this.blur()); /*去掉a标签虚线*/
+
+        &:hover, &.selected
+        {
+            background: #f90;
+            color: #fff;
+        }
+    }
+}
+
+
+.focuspic_title
+{
+    text-indent: 10px;
+    left: 0;
+}

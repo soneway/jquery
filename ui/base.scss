@@ -1,0 +1,250 @@
+/*
+PC端基础样式
+包括样式重置,常用类等
+*/
+
+//默认变量
+$font-size: 12px !default;
+$line-height: 1.5 !default;
+$font-family: 微软雅黑 !default;
+$color: #333 !default;
+$color-focus: #df2221 !default;
+$width: 1004px !default;
+
+//外部引入
+@import '../scss/var';
+
+/*元素*/
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+
+body
+{
+    overflow-x: hidden;
+    /*可继承*/
+    -webkit-text-size-adjust: none;
+    font-size: $font-size;
+    color: $color;
+    line-height: $line-height;
+    font-family: $font-family;
+}
+
+
+li
+{
+    list-style: none;
+}
+
+
+img, input
+{
+    vertical-align: middle;
+}
+
+
+img
+{
+    border: none;
+}
+
+
+a
+{
+    color: inherit;
+    outline: none;
+    blr: expression(this.onFocus=this.blur()); /*去掉a标签虚线*/
+    text-decoration: none;
+    cursor: pointer;
+
+    &, & *
+    {
+        @include mx_transition(all 0.3s ease);
+    }
+
+    &:hover, &:hover *
+    {
+        color: $color-focus;
+    }
+}
+
+
+/*h类标签*/
+$hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
+@each $h, $size in $hx
+{
+    #{$h}
+    {
+        font-size: $size;
+    }
+}
+
+
+/*类*/
+/*hidden*/
+.hidden
+{
+    display: none !important;
+}
+
+
+/*show*/
+.show
+{
+    display: block !important;
+}
+
+
+/*visible*/
+.visible
+{
+    @include mx_opacity(1);
+}
+
+
+/*unvisible*/
+.unvisible
+{
+    @include mx_opacity(0);
+}
+
+
+/*float*/
+.fl
+{
+    float: left;
+}
+
+
+.fr
+{
+    float: right;
+}
+
+
+/*居中*/
+.center
+{
+    text-align: center;
+}
+
+
+/*红色*/
+.red
+{
+    color: #f00;
+}
+
+
+/*定位*/
+.absolute
+{
+    @extend %ph_palt;
+}
+
+
+.fixed
+{
+    @extend %ph_pflt;
+}
+
+
+/*动画*/
+.transition
+{
+    @extend %ph_transall;
+}
+
+
+.transform
+{
+    @extend %ph_transtransf;
+}
+
+
+.notrans
+{
+    @include mx_transition(none !important);
+}
+
+
+/*abtn*/
+.abtn
+{
+    &:hover
+    {
+        img
+        {
+            @include mx_opacity(0.85);
+        }
+    }
+}
+
+
+/*换行*/
+.newline
+{
+    word-break: break-all;
+}
+
+
+/*不换行*/
+.nonewline
+{
+    white-space: nowrap;
+}
+
+
+/*hiddenbox*/
+.hiddenbox
+{
+    @include mx_plt($top: -9999px);
+}
+
+
+/*slidebox*/
+.slidebox
+{
+    position: absolute;
+    display: none;
+    overflow: hidden;
+
+    li
+    {
+        text-align: center;
+    }
+}
+
+
+/*pager*/
+.pager
+{
+    padding: 4px 10px;
+    @extend %ph_hauto;
+    clear: both;
+    float: right;
+
+    & a
+    {
+        @extend %ph_inlineblock;
+        padding: 0 10px;
+        height: 26px;
+        line-height: 26px;
+        text-align: center;
+        color: #777;
+        background: #fff;
+        border-radius: 3px;
+        margin-right: 5px;
+        @include mx_box-shadow(0 1px 5px rgba(0, 0, 0, 0.5));
+
+        &:hover, &.selected
+        {
+            background: #df0006;
+            color: #fff !important;
+            font-weight: bold;
+        }
+    }
+}

@@ -1,0 +1,279 @@
+/*
+ * jquery.fancybox
+ * 弹出框样式
+ */
+
+#fancybox-loading
+{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    margin-top: -20px;
+    margin-left: -20px;
+    overflow: hidden;
+    z-index: 1104;
+    display: none;
+}
+
+
+#fancybox-loading div
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 480px;
+    background-image: url(http://img.gd.sohu.com/static/v3/img/fancybox.png);
+}
+
+
+#fancybox-overlay
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1100;
+    display: none;
+}
+
+
+#fancybox-tmp
+{
+    padding: 0;
+    margin: 0;
+    border: 0;
+    overflow: auto;
+    display: none;
+}
+
+
+#fancybox-wrap
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 20px;
+    z-index: 1101;
+    outline: none;
+    display: none;
+}
+
+
+#fancybox-wrap a
+{
+    cursor: pointer;
+}
+
+
+#fancybox-outer
+{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+    -ms-box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+}
+
+
+#fancybox-content
+{
+    width: 0;
+    height: 0;
+    padding: 0;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+    z-index: 1102;
+    border: 0 solid #fff;
+    background: #fff;
+}
+
+
+#fancybox-hide-sel-frame
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: 1101;
+}
+
+
+#fancybox-close
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    background: url(http://img.gd.sohu.com/static/v3/img/fancybox.png) -40px 0;
+    z-index: 1103;
+    display: none;
+    overflow: hidden;
+}
+
+
+#fancybox-close:hover
+{
+    opacity: 0.85;
+    filter: alpha(opacity=85);
+}
+
+
+#fancybox-error
+{
+    color: #444;
+    font: normal 12px/20px Arial;
+    padding: 14px;
+    margin: 0;
+}
+
+
+#fancybox-img
+{
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    border: none;
+    outline: none;
+    line-height: 0;
+    vertical-align: top;
+}
+
+
+#fancybox-frame
+{
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
+
+
+/*左右按钮*/
+#fancybox-left, #fancybox-right
+{
+    position: absolute;
+    bottom: 0;
+    height: 100%;
+    _height: expression(this.parentNode.clientHeight + "px"); /*IE6高度*/
+    width: 35%;
+    z-index: 1102;
+    display: none;
+    background: url(about:blank); /*防止IE678不显示*/
+}
+
+
+#fancybox-left span, #fancybox-right span
+{
+    position: absolute;
+    top: 50%;
+    width: 30px;
+    height: 30px;
+    margin-top: -15px;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+
+
+#fancybox-left:hover span, #fancybox-right:hover span
+{
+    opacity: 1;
+    filter: alpha(opacity=100);
+}
+
+
+#fancybox-left
+{
+    left: 0;
+}
+
+
+#fancybox-left span
+{
+    left: 10%;
+    background-image: url(http://img.gd.sohu.com/static/v3/img/fancybox.png);
+    background-position: -40px -30px;
+}
+
+
+#fancybox-right
+{
+    right: 0;
+}
+
+
+#fancybox-right span
+{
+    right: 10%;
+    background-image: url(http://img.gd.sohu.com/static/v3/img/fancybox.png);
+    background-position: -40px -60px;
+}
+
+
+/*标题*/
+#fancybox-title
+{
+    font-size: 12px;
+    z-index: 1102;
+}
+
+
+.fancybox-title-inside
+{
+    padding-bottom: 10px;
+    text-align: center;
+    color: #333;
+    background: #fff;
+    position: relative;
+}
+
+
+.fancybox-title-outside
+{
+    padding-top: 10px;
+    color: #fff;
+}
+
+
+.fancybox-title-over
+{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    color: #fff;
+    text-align: left;
+}
+
+
+#fancybox-title-over
+{
+    padding: 10px;
+    display: block;
+}
+
+
+.fancybox-title-float
+{
+    position: absolute;
+    left: 0;
+    bottom: -20px;
+    height: 32px;
+    color: #fff;
+    line-height: 32px;
+    background: #000;
+    border: 2px solid #fff;
+    padding: 0 10px;
+    border-radius: 32px;
+    -webkit-box-shadow: 0 0 6px rgba(0, 0, 0, 0.7);
+    -ms-box-shadow: 0 0 6px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.7);
+}

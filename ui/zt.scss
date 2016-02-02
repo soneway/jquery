@@ -1,0 +1,104 @@
+/*
+PC端界面样式
+包括样式重置,常用类等
+*/
+
+//默认变量
+$width: 1004px !default;
+//背景类型(0:bg背景,1:part背景)
+$bg-type: 0 !default;
+$header-height: auto !default;
+$part1-height: auto !default;
+$part2-height: auto !default;
+$part3-height: auto !default;
+$part4-height: auto !default;
+$part5-height: auto !default;
+$part6-height: auto !default;
+$part7-height: auto !default;
+$part8-height: auto !default;
+$part9-height: auto !default;
+$footer-height: auto !default;
+
+//外部引入
+@import 'base';
+
+/*元素*/
+body
+{
+    @if $bg-type == 0
+    {
+        background: url(../img/bg.jpg) center top no-repeat;
+    }
+}
+
+
+/*内容*/
+.headerbox, .mianbox, .footerbox
+{
+    clear: both;
+}
+
+
+.header, .main, .footer
+{
+    width: $width;
+    margin: 0 auto;
+    position: relative;
+}
+
+
+@if $header-height != auto
+{
+    .header
+    {
+        height: $header-height;
+    }
+}
+
+
+@if $footer-height != auto
+{
+    .footer
+    {
+        height: $footer-height;
+    }
+}
+
+
+/*part部分*/
+$parts: (
+        part1: $part1-height,
+        part2: $part2-height,
+        part3: $part3-height,
+        part4: $part4-height,
+        part5: $part5-height,
+        part6: $part6-height,
+        part7: $part7-height,
+        part8: $part8-height,
+        part9: $part9-height
+);
+
+%ph_parts
+{
+    overflow: hidden;
+    position: relative;
+}
+
+
+@each $part, $part-height in $parts
+{
+    .#{$part}
+    {
+        @if $part-height != auto
+        {
+            height: $part-height;
+        }
+
+        @if $bg-type == 1
+        {
+            background: url(../img/#{$part}_bg.jpg) center 0 no-repeat;
+        }
+
+        @extend %ph_parts;
+    }
+}
