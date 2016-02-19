@@ -1,32 +1,10 @@
 (function (window, $) {
 
     $.fn.focuspic = function (options) {
-        $.fn.focuspic.deflunt = {
-            //图片地址
-            pics: null,
-            //链接
-            links: null,
-            //标题
-            titles: null,
-            //效果
-            effect: 'fade',
-            //动画效果间隔时间
-            duration: 600,
-            //动画切换间隔时间
-            loopDuration: 8000,
-            //触发事件类型
-            eventType: 'mouseover',
-            //是否自动播放
-            autoPlay: true,
-            //是否显示数字
-            isShowNum: true,
-            //播放回调函数
-            playCallback: null
-        };
 
         //每个元素执行
         return this.each(function () {
-            var opts = $.extend({}, $.fn.focuspic.deflunt, options);
+            var opts = $.extend({}, $.fn.focuspic.defaults, options);
 
             //图片地址
             if (!opts.pics) {
@@ -52,36 +30,27 @@
             //定时器
                 timer,
             //循环总数
-                picsLength = pics.length;
-
-            $this = $(this);
-            var height = $this.height(),
+                picCount = pics.length,
+                $this = $(this),
+                height = $this.height(),
                 width = $this.width();
+
             //按钮html生成
             var btnHtml = [];
-            for (var i = 0, len = picsLength; i < len; i++) {
-                btnHtml.push('<a href="javascript:void(0)">' + (isShowNum ? (i + 1) : '&nbsp;') + '</a>');
+            for (var i = 0, len = picCount; i < len; i++) {
+                btnHtml.push('<a>' + (isShowNum ? (i + 1) : '&nbsp;') + '</a>');
             }
             //html拼接
-            var html = [];
-            html.push('<div class="focuspic_container" style="width: ' + width + 'px; height: ' + height + 'px;">');
-            html.push('    <div class="focuspic_img_contaner"></div>');
-            html.push('    <div class="focuspic_ctrl_container">');
-            html.push('        <div class="focuspic_ctrl_bg" style="width:' + width + 'px;">');
-            html.push('        </div>');
-            html.push('        <div class="focuspic_ctrl">');
-            html.push(btnHtml.join(''));
-            html.push('        </div>');
-            html.push('        <div class="focuspic_title">');
-            html.push('        </div>');
-            html.push('    </div>');
-            html.push('</div>');
-            $this.html(html.join(''));
+            var html = '<div class="focuspic_container" style="width: ' + width + 'px; height: ' + height + 'px;"><div class="focuspic_img_contaner"></div><div class="focuspic_ctrl_container">' +
+                '<div class="focuspic_ctrl_bg" style="width:' + width + 'px;"></div><div class="focuspic_ctrl">' + btnHtml.join('') + '</div><div class="focuspic_title"></div></div></div>';
+            $this.html(html);
+
 
             //相关操作
-            var $btns = $this.find('.focuspic_ctrl a');
-            var $imgContainer = $this.find('.focuspic_img_contaner');
-            var $title = $this.find('.focuspic_title');
+            var $btns = $this.find('.focuspic_ctrl a'),
+                $imgContainer = $this.find('.focuspic_img_contaner'),
+                $title = $this.find('.focuspic_title');
+
             //点击操作
             $btns.bind(eventType, function () {
                 $btns.removeClass('selected');
@@ -122,7 +91,7 @@
                     case 'extendb':
                     {
                         $imgContainer.animate({
-                            width: 'toggle',
+                            width : 'toggle',
                             height: 'toggle'
                         }, duration, 'swing');
                         break;
@@ -145,12 +114,34 @@
                 timer = setInterval(play, loopDuration);
             }
             function play() {
-                if (loopIndex++ == (picsLength - 1)) {
+                if (loopIndex++ == (picCount - 1)) {
                     loopIndex = 0;
                 }
                 $btns.eq(loopIndex).trigger(eventType);
             }
         });
+    };
+    $.fn.focuspic.defaults = {
+        //图片地址
+        pics        : null,
+        //链接
+        links       : null,
+        //标题
+        titles      : null,
+        //效果
+        effect      : 'fade',
+        //动画效果间隔时间
+        duration    : 600,
+        //动画切换间隔时间
+        loopDuration: 8000,
+        //触发事件类型
+        eventType   : 'mouseover',
+        //是否自动播放
+        autoPlay    : true,
+        //是否显示数字
+        isShowNum   : true,
+        //播放回调函数
+        playCallback: null
     };
 
 })(window, $);

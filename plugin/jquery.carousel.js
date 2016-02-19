@@ -4,30 +4,6 @@
 (function (window, $) {
 
     $.fn.carousel = function (options) {
-        $.fn.carousel.defaults = {
-            //是否竖直方向滚动
-            isVertical   : false,
-            //滑动阈值
-            swipThreshold: 50,
-            //是否自动轮播
-            isAutoPlay   : true,
-            //轮播inter
-            autoPlayInter: 6000,
-            //动画时长
-            slideTime    : 400,
-            //轮播回调函数
-            slideCallback: null,
-            //是否显示title
-            isShowTitle  : true,
-            //初始index
-            initIndex    : 0,
-            //后退按钮
-            $btnPrev     : null,
-            //前进按钮
-            $btnNext     : null,
-            //是否显示pager
-            isShowPager  : true
-        };
 
         var document = window.document,
             $doc = $(document),
@@ -48,6 +24,7 @@
                 initIndex = opts.initIndex,
                 $btnPrev = opts.$btnPrev,
                 $btnNext = opts.$btnNext,
+                inited = opts.inited,
                 isShowPager = opts.isShowPager;
 
             //变量
@@ -74,6 +51,9 @@
                     html += '</div>';
                 }
                 $pagers = $this.append(html).find('div.jquery-carousel-pager span');
+
+                //初始化完成回调
+                typeof inited === 'function' && inited($items);
 
                 //初始化事件
                 initEvent();
@@ -114,7 +94,7 @@
                 }
 
                 //移动到函数
-                function slide(swipSpan) {
+                function slide(swipSpan, isNoAni) {
                     var translate = -index * (isVertical ? height : width);
 
                     if (typeof swipSpan === 'number') {
@@ -134,24 +114,37 @@
                         });
                     }
                     else {
+
+                        //是否有动画
+                        var duration = isNoAni ? 0 : slideTime;
+                        //作动画
                         isVertical ? $wrap.animate({
                             top: translate + 'px'
-                        }, slideTime) : $wrap.animate({
+                        }, duration) : $wrap.animate({
                             left: translate + 'px'
-                        }, slideTime);
+                        }, duration);
 
                         //滚动回调函数
                         typeof slideCallback === 'function' && slideCallback(index);
 
                         //title
-                        var title = $items.eq(index).attr('data-title');
-                        $title.slideUp(200);
-                        title && setTimeout(function () {
-                            $title.slideDown(200).html(title);
-                        }, 200);
+                        if (isShowTitle) {
+                            var title = $items.eq(index).attr('data-title');
+                            $title.slideUp(200);
+                            title && setTimeout(function () {
+                                $title.slideDown(200).html(title);
+                            }, 200);
+                        }
 
                         //pager状态
-                        $pagers.removeClass('selected').eq(index).addClass('selected');
+                        if (isShowPager) {
+                            $pagers.removeClass('selected');
+
+                            //下一队列执行,以防某些情况下无效
+                            setTimeout(function () {
+                                $pagers.eq(index).addClass('selected')
+                            }, 0);
+                        }
                     }
                 }
 
@@ -164,9 +157,13 @@
                 setInter();
 
                 //暴露slideToIndex方法
-                me.slideToIndex = function (i) {
+                me.slideToIndex = function (i, isNoAni) {
+                    if (typeof i !== 'number') {
+                        return console.log('index应为数字');
+                    }
+
                     index = i;
-                    slide();
+                    slide(null, isNoAni);
                 };
 
                 //暴露prev方法
@@ -235,8 +232,8 @@
                         ++index === itemCount && (index = itemCount - 1);
                     }
 
-                    //滚动
-                    swipSpan !== 0 && slide();
+                    //滚动(swipSpan === undefined时无动画)
+                    swipSpan !== 0 && slide(null, swipSpan === undefined);
                 }).trigger('mouseup');
 
 
@@ -270,6 +267,32 @@
 
         });
 
+    };
+    $.fn.carousel.defaults = {
+        //是否竖直方向滚动
+        isVertical   : false,
+        //滑动阈值
+        swipThreshold: 50,
+        //是否自动轮播
+        isAutoPlay   : true,
+        //轮播inter
+        autoPlayInter: 6000,
+        //动画时长
+        slideTime    : 400,
+        //轮播回调函数
+        slideCallback: null,
+        //是否显示title
+        isShowTitle  : true,
+        //初始index
+        initIndex    : 0,
+        //后退按钮
+        $btnPrev     : null,
+        //前进按钮
+        $btnNext     : null,
+        //初始化完成回调
+        inited       : null,
+        //是否显示pager
+        isShowPager  : true
     };
 
 })(window, $);

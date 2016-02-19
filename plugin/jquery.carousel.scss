@@ -59,7 +59,7 @@ $jquery-carousel-pager-radius: 4px !default;
                 &.selected
                 {
                     box-shadow: 0 0 3px rgba(0, 0, 0, 0.9);
-                    border-color: $border-color;
+                    border-color: #ddd;
                 }
 
                 .vertical &
