@@ -1,6 +1,28 @@
 (function (window, $) {
 
     $.fn.focuspic = function (options) {
+        $.fn.focuspic.deflunt = {
+            //图片地址
+            pics: null,
+            //链接
+            links: null,
+            //标题
+            titles: null,
+            //效果
+            effect: 'fade',
+            //动画效果间隔时间
+            duration: 600,
+            //动画切换间隔时间
+            loopDuration: 8000,
+            //触发事件类型
+            eventType: 'mouseover',
+            //是否自动播放
+            autoPlay: true,
+            //是否显示数字
+            isShowNum: true,
+            //播放回调函数
+            playCallback: null
+        };
 
         //每个元素执行
         return this.each(function () {
@@ -129,28 +151,6 @@
                 $btns.eq(loopIndex).trigger(eventType);
             }
         });
-    };
-    $.fn.focuspic.deflunt = {
-        //图片地址
-        pics: null,
-        //链接
-        links: null,
-        //标题
-        titles: null,
-        //效果
-        effect: 'fade',
-        //动画效果间隔时间
-        duration: 600,
-        //动画切换间隔时间
-        loopDuration: 8000,
-        //触发事件类型
-        eventType: 'mouseover',
-        //是否自动播放
-        autoPlay: true,
-        //是否显示数字
-        isShowNum: true,
-        //播放回调函数
-        playCallback: null
     };
 
 })(window, $);

@@ -6,7 +6,7 @@ $jquery-carousel-pager-radius: 4px !default;
 {
     overflow: hidden;
     position: relative;
-    @include mx_user-select(none);
+    user-select: none;
 
     @at-root
     {
@@ -48,19 +48,18 @@ $jquery-carousel-pager-radius: 4px !default;
 
             span
             {
-                @extend %ph_inlineblock;
+                display: inline-block;
                 margin: $jquery-carousel-pager-radius;
                 border: $jquery-carousel-pager-radius solid #999;
                 border-color: rgba(#fff, 0.5);
                 border-radius: 50%;
-                @include mx_box-shadow(0 0 3px rgba(0, 0, 0, 0.5));
+                box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
                 cursor: pointer;
 
                 &.selected
                 {
-                    @include mx_box-shadow(0 0 3px rgba(0, 0, 0, 0.9));
-                    border-color: #ddd;
-                    border-color: rgba(#fff, 0.9);
+                    box-shadow: 0 0 3px rgba(0, 0, 0, 0.9);
+                    border-color: $border-color;
                 }
 
                 .vertical &

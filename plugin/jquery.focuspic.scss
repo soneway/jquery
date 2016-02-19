@@ -48,7 +48,7 @@ jquery.focus
 {
     height: 20px;
     overflow: hidden;
-    @include mx_opacity(0.5);
+    opacity: 0.5;
     background: #000;
 }
 

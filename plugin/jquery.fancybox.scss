@@ -2,9 +2,8 @@
  * jquery.fancybox
  * 弹出框样式
  */
-
-//背景图片
-$fancy-bg: "http://img.gd.sohu.com/static/v3/img/fancybox.png";
+//变量
+$fancybg: "http://img.gd.sohu.com/static/v3/img/fancybox.png" !default;
 
 #fancybox-loading
 {
@@ -28,7 +27,7 @@ $fancy-bg: "http://img.gd.sohu.com/static/v3/img/fancybox.png";
     left: 0;
     width: 40px;
     height: 480px;
-    background-image: url($fancy-bg);
+    background-image: url(#{$fancybg});
 }
 
 
@@ -116,7 +115,7 @@ $fancy-bg: "http://img.gd.sohu.com/static/v3/img/fancybox.png";
     right: 0;
     width: 30px;
     height: 30px;
-    background: url($fancy-bg) -40px 0;
+    background: url(#{$fancybg}) -40px 0;
     z-index: 1103;
     display: none;
     overflow: hidden;
@@ -203,7 +202,7 @@ $fancy-bg: "http://img.gd.sohu.com/static/v3/img/fancybox.png";
 #fancybox-left span
 {
     left: 10%;
-    background-image: url($fancy-bg);
+    background-image: url(#{$fancybg});
     background-position: -40px -30px;
 }
 
@@ -217,7 +216,7 @@ $fancy-bg: "http://img.gd.sohu.com/static/v3/img/fancybox.png";
 #fancybox-right span
 {
     right: 10%;
-    background-image: url($fancy-bg);
+    background-image: url(#{$fancybg});
     background-position: -40px -60px;
 }
 

@@ -4,12 +4,12 @@ PC端基础样式
 */
 
 //默认变量
+$duration: 0.3s !default;
 $font-size: 12px !default;
 $line-height: 1.5 !default;
-$font-family: 微软雅黑 !default;
+$font-family: 微软雅黑, Helvetica !default;
 $color: #333 !default;
 $color-focus: #df2221 !default;
-$width: 1004px !default;
 
 //外部引入
 @import '../scss/var';
@@ -62,7 +62,7 @@ a
 
     &, & *
     {
-        @include mx_transition(all 0.3s ease);
+        @extend .transition;
     }
 
     &:hover, &:hover *
@@ -84,31 +84,41 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
 
 
 /*类*/
-/*hidden*/
-.hidden
+
+/*隐藏*/
+.hide
 {
     display: none !important;
 }
 
 
-/*show*/
+/*显示*/
 .show
 {
     display: block !important;
 }
 
 
-/*visible*/
-.visible
+.fade-out, .fade-in
 {
-    @include mx_opacity(1);
+    @extend .transition;
+    transition-property: opacity, visibility;
 }
 
 
-/*unvisible*/
-.unvisible
+/*渐隐*/
+.fade-out
 {
-    @include mx_opacity(0);
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+
+/*渐显*/
+.fade-in
+{
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 
@@ -139,48 +149,22 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
 }
 
 
-/*定位*/
-.absolute
-{
-    @extend %ph_palt;
-}
-
-
-.fixed
-{
-    @extend %ph_pflt;
-}
-
-
 /*动画*/
 .transition
 {
-    @extend %ph_transall;
+    transition: all 0.3s ease;
 }
 
 
 .transform
 {
-    @extend %ph_transtransf;
+    transition: transform 0.3s ease;
 }
 
 
 .notrans
 {
-    @include mx_transition(none !important);
-}
-
-
-/*abtn*/
-.abtn
-{
-    &:hover
-    {
-        img
-        {
-            @include mx_opacity(0.85);
-        }
-    }
+    transition: none !important;
 }
 
 
@@ -202,49 +186,4 @@ $hx: (h1: 1.45em, h2: 1.3em, h3: 1.15em, h4: 1em);
 .hiddenbox
 {
     @include mx_plt($top: -9999px);
-}
-
-
-/*slidebox*/
-.slidebox
-{
-    position: absolute;
-    display: none;
-    overflow: hidden;
-
-    li
-    {
-        text-align: center;
-    }
-}
-
-
-/*pager*/
-.pager
-{
-    padding: 4px 10px;
-    @extend %ph_hauto;
-    clear: both;
-    float: right;
-
-    & a
-    {
-        @extend %ph_inlineblock;
-        padding: 0 10px;
-        height: 26px;
-        line-height: 26px;
-        text-align: center;
-        color: #777;
-        background: #fff;
-        border-radius: 3px;
-        margin-right: 5px;
-        @include mx_box-shadow(0 1px 5px rgba(0, 0, 0, 0.5));
-
-        &:hover, &.selected
-        {
-            background: #df0006;
-            color: #fff !important;
-            font-weight: bold;
-        }
-    }
 }
