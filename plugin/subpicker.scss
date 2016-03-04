@@ -1,0 +1,141 @@
+/*二级选择器*/
+//变量
+$pi-subpicker-width: 110px !default;
+$pi-subpicker-height: $input-height !default;
+$pi-subpicker-ul-box-width: 400px !default;
+
+.pi-subpicker
+{
+    width: $pi-subpicker-width;
+    height: $pi-subpicker-height;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+
+    &:after
+    {
+        $w: 5px;
+
+        content: '';
+        @extend %ph_absolute;
+        top: 50%;
+        right: 0.45em;
+        margin-top: -$w/2;
+        border: $w solid transparent;
+        border-top-color: $color;
+    }
+
+    /*打开box*/
+    &.on
+    {
+        .ul-box
+        {
+            visibility: visible;
+            opacity: 1;
+            transform: none;
+        }
+
+        .pi-opener
+        {
+            border-color: $main-color;
+        }
+    }
+
+    .pi-opener
+    {
+        background: none;
+        width: 100%;
+        position: relative;
+        z-index: 1;
+    }
+
+    .ul-box
+    {
+        $lh: 1.8;
+
+        @extend %ph_absolute;
+        left: 0;
+        top: $pi-subpicker-height;
+        width: $pi-subpicker-ul-box-width;
+        height: $lh * 5em;
+        line-height: $lh;
+        background: #fff;
+        z-index: 5;
+        @extend .shadow;
+        //动画
+        @extend .transition;
+        visibility: hidden;
+        opacity: 0;
+        transform: scale3d(1, 0, 1);
+        transform-origin: center top;
+    }
+
+    .ul-root
+    {
+        height: 100%;
+        overflow: auto;
+        width: $pi-subpicker-width;
+        border-right: 1px solid $border-color;
+    }
+
+    .li-root
+    {
+        &:hover
+        {
+            .pk-root
+            {
+                background: $border-color;
+            }
+        }
+
+        &.on
+        {
+            .pk-root
+            {
+                background: $main-color;
+                color: #fff;
+            }
+
+            .ul-sub
+            {
+                display: block;
+            }
+        }
+    }
+
+    .pk-root
+    {
+        display: block;
+        text-indent: 1em;
+    }
+
+    .ul-sub
+    {
+        display: none;
+        width: $pi-subpicker-ul-box-width - $pi-subpicker-width;
+        height: 100%;
+        overflow: auto;
+        @extend %ph_absolute;
+        left: $pi-subpicker-width;
+        top: 0;
+        padding: 10px;
+    }
+
+    .li-sub
+    {
+        display: inline-block;
+        padding: 0 8px;
+        cursor: pointer;
+
+        &:hover
+        {
+            background: $border-color;
+        }
+
+        &.selected
+        {
+            background: $main-color;
+            color: #fff;
+        }
+    }
+}
