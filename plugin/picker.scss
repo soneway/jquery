@@ -12,13 +12,13 @@ $pi-picker-ul-box-width: 400px !default;
 
     &:after
     {
-        $w: 5px;
+        $w: 4px;
 
         content: '';
         @extend %ph_absolute;
         top: 50%;
         right: 0.45em;
-        margin-top: -$w/2;
+        margin-top: -$w / 2;
         border: $w solid transparent;
         border-top-color: $color;
     }
@@ -44,6 +44,7 @@ $pi-picker-ul-box-width: 400px !default;
         background: none;
         position: relative;
         z-index: 1;
+        cursor: pointer;
     }
 
     .ul-box
@@ -77,6 +78,7 @@ $pi-picker-ul-box-width: 400px !default;
     .li-root
     {
         text-indent: 1em;
+        cursor: pointer;
 
         &:hover
         {
