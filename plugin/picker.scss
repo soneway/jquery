@@ -1,7 +1,6 @@
 /*一级选择器*/
 //变量
 $pi-picker-height: $input-height !default;
-$pi-picker-ul-box-width: 400px !default;
 
 .pi-picker
 {
@@ -54,7 +53,7 @@ $pi-picker-ul-box-width: 400px !default;
         @extend %ph_absolute;
         left: 0;
         top: $pi-picker-height;
-        width: $pi-picker-ul-box-width;
+        width: 100%;
         max-height: $lh * 5em;
         line-height: $lh;
         background: #fff;
@@ -71,7 +70,6 @@ $pi-picker-ul-box-width: 400px !default;
 
     .ul-root
     {
-        width: 100%;
         border-right: 1px solid $border-color;
     }
 
