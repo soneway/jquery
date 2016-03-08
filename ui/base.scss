@@ -65,10 +65,16 @@ a
         @extend .transition;
     }
 
-    &:hover, &:hover *
+    &:hover
     {
         color: $color-focus;
     }
+}
+
+
+i
+{
+    font-style: normal;
 }
 
 
