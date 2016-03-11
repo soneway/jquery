@@ -30,7 +30,7 @@
 
             //变量
             var $opener = $(this).addClass('pi-opener').wrap('<div class="pi-picker"></div>'),
-                $picker = $opener.parent('.pi-picker'), $ulRoot, $liRoot;
+                $picker = $opener.parent('.pi-picker'), $ulBox, $ulRoot, $liRoot;
 
             //添加picker元素
             pickerEls.push($picker[0]);
@@ -62,6 +62,7 @@
 
                 $picker.append('<div class="ul-box"><ul class="ul-root"></ul></div>');
                 $ulRoot = $picker.find('.ul-root');
+                $ulBox = $picker.find('.ul-box');
 
                 //列表html
                 refreshList(data);
@@ -96,10 +97,10 @@
                 });
 
                 //mousewheel事件,滚动到最上面和最下面时不滚动
-                var ulRootEl = $ulRoot[0];
+                var ulboxEl = $ulBox[0];
                 window.addEventListener && $picker[0].addEventListener('mousewheel', function (evt) {
                     var deltaY = evt.deltaY;
-                    if (deltaY < 0 && ulRootEl.scrollTop === 0 || deltaY > 0 && ulRootEl.scrollTop + ulRootEl.offsetHeight === ulRootEl.scrollHeight) {
+                    if (deltaY < 0 && ulboxEl.scrollTop === 0 || deltaY > 0 && ulboxEl.scrollTop + ulboxEl.offsetHeight === ulboxEl.scrollHeight) {
                         $picker.hasClass('on') && evt.preventDefault();
                     }
                 }, false);
