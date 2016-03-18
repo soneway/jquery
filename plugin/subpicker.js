@@ -111,15 +111,6 @@
                     //打开.关闭box
                     $picker.toggleClass('on');
                 });
-
-                //mousewheel事件,滚动到最上面和最下面时不滚动
-                var ulRootEl = $ulRoot[0];
-                ulRootEl.addEventListener && ulRootEl.addEventListener('mousewheel', function (evt) {
-                    var deltaY = evt.deltaY;
-                    if (deltaY < 0 && ulRootEl.scrollTop === 0 || deltaY > 0 && ulRootEl.scrollTop + ulRootEl.offsetHeight === ulRootEl.scrollHeight) {
-                        $picker.hasClass('on') && evt.preventDefault();
-                    }
-                }, false);
             }
 
 

@@ -1,13 +1,11 @@
 /*二级选择器*/
 //变量
-$pi-subpicker-width: 110px !default;
+$pi-subpicker-left-width: 100px !default;
 $pi-subpicker-height: $input-height !default;
-$pi-subpicker-ul-box-width: 400px !default;
+$pi-subpicker-width: 400px !default;
 
 .pi-subpicker
 {
-    width: $pi-subpicker-width;
-    height: $pi-subpicker-height;
     display: inline-block;
     vertical-align: middle;
     position: relative;
@@ -44,10 +42,11 @@ $pi-subpicker-ul-box-width: 400px !default;
     .pi-opener
     {
         background: none;
-        width: 100%;
         position: relative;
         z-index: 1;
         cursor: pointer;
+        @extend .center;
+        text-indent: -1em;
     }
 
     .ul-box
@@ -57,7 +56,7 @@ $pi-subpicker-ul-box-width: 400px !default;
         @extend %ph_absolute;
         left: 0;
         top: $pi-subpicker-height;
-        width: $pi-subpicker-ul-box-width;
+        width: $pi-subpicker-width;
         height: $lh * 5em;
         line-height: $lh;
         background: #fff;
@@ -75,7 +74,7 @@ $pi-subpicker-ul-box-width: 400px !default;
     {
         height: 100%;
         overflow: auto;
-        width: $pi-subpicker-width;
+        width: $pi-subpicker-left-width;
         border-right: 1px solid $border-color;
     }
 
@@ -113,11 +112,11 @@ $pi-subpicker-ul-box-width: 400px !default;
     .ul-sub
     {
         display: none;
-        width: $pi-subpicker-ul-box-width - $pi-subpicker-width;
+        width: $pi-subpicker-width - $pi-subpicker-left-width;
         height: 100%;
         overflow: auto;
         @extend %ph_absolute;
-        left: $pi-subpicker-width;
+        left: $pi-subpicker-left-width;
         top: 0;
         padding: 10px;
     }
