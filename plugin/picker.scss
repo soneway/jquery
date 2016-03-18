@@ -44,6 +44,8 @@ $pi-picker-height: $input-height !default;
         position: relative;
         z-index: 1;
         cursor: pointer;
+        @extend .center;
+        text-indent: -1em;
     }
 
     .ul-box
