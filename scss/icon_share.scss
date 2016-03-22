@@ -1,0 +1,50 @@
+﻿/*分享图标*/
+.icon_share
+{
+    text-align: center;
+    /*a标签间隔为0*/
+    font-size: 0;
+
+    $height: 40px;
+    a
+    {
+        display: inline-block;
+        width: $height;
+        height: $height;
+        vertical-align: middle;
+        position: relative;
+        background: url(http://img.gd.sohu.com/static/img/jquery/icon_share.png);
+        background-size: auto $height;
+        border-radius: 20%;
+        overflow: hidden;
+        margin-right: 6px;
+        box-shadow: 0 0 1px rgba(#000, 0.3);
+
+        &:after
+        {
+            content: '';
+            @extend %ph_palt;
+            @extend %ph_full;
+            @extend .transition;
+        }
+
+        &:hover
+        {
+            &:after
+            {
+                background: #000;
+                filter: alpha(opacity=20);
+                background: rgba(#000, 0.2);
+            }
+        }
+    }
+
+    $providers: weibosina, qq, renren, tieba, tqq, douban, kaixin001, netease;
+    @each $provider in $providers
+    {
+        .#{$provider}
+        {
+            background-position: #{ -$height * (index($providers, $provider) - 1)} 0;
+        }
+    }
+}
