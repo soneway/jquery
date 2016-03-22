@@ -5,24 +5,6 @@
 (function (window, $) {
 
     $.fn.scrollpage = function (options) {
-        $.fn.scrollpage.defaults = {
-            //滚动动画duration
-            scrollDuration: 800,
-            //内容动画duration
-            duration      : 800,
-            //滚动动画easing
-            scrollEasing  : 'easeInOutCubic',
-            //内容动画easing
-            easing        : 'swing',
-            //是否禁用滚动条
-            isUnscroll    : true,
-            //初始index
-            initIndex     : 0,
-            //是否禁用
-            disable       : false,
-            //滚动回调函数
-            slideCallback : null
-        };
 
         //每个元素执行
         return this.each(function () {
@@ -35,6 +17,7 @@
                 easing = opts.easing,
                 isUnscroll = opts.isUnscroll,
                 initIndex = opts.initIndex,
+                inited = opts.inited,
                 slideCallback = opts.slideCallback;
 
             //变量
@@ -54,8 +37,7 @@
 
                 //如果是ie6,不作特效
                 if (isIE6) {
-                    alert('您的浏览器太低级啦!请使用谷歌浏览器或者升级您的浏览器!');
-                    return;
+                    return alert('您的浏览器太低级啦!请使用谷歌浏览器或者升级您的浏览器!');
                 }
 
                 //添加class
@@ -72,6 +54,10 @@
 
                     $this.css(opts);
                 });
+
+                //初始化完成
+                $scrollbox.addClass('inited');
+                typeof inited === 'function' && inited($items);
 
                 //初始化事件
                 initEvent();
@@ -130,16 +116,14 @@
                 //暴露prev函数
                 thisEl.prev = function () {
                     if (index-- === 0) {
-                        index = 0;
-                        return;
+                        return index = 0;
                     }
                     slide();
                 };
                 //暴露next函数
                 thisEl.next = function () {
                     if (index++ === itemCount - 1) {
-                        index = itemCount - 1;
-                        return;
+                        return index = itemCount - 1;
                     }
                     slide();
                 };
@@ -157,8 +141,7 @@
 
                         //初始化时,没有delta参数
                         if (!delta) {
-                            slide();
-                            return;
+                            return slide();
                         }
 
                         //较正delta的值(mac osx)
@@ -216,6 +199,26 @@
 
         });
 
+    };
+    $.fn.scrollpage.defaults = {
+        //滚动动画duration
+        scrollDuration: 800,
+        //内容动画duration
+        duration      : 800,
+        //滚动动画easing
+        scrollEasing  : 'easeInOutCubic',
+        //内容动画easing
+        easing        : 'swing',
+        //是否禁用滚动条
+        isUnscroll    : true,
+        //初始index
+        initIndex     : 0,
+        //是否禁用
+        disable       : false,
+        //初始化完成回调
+        inited        : null,
+        //滚动回调函数
+        slideCallback : null
     };
 
 })(window, $);
