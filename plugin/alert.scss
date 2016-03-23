@@ -1,0 +1,69 @@
+/*通用弹框样式*/
+//变量
+$fancybg: "../img/fancybox.png";
+
+//引入库
+@import "jquery/plugin/jquery.fancybox";
+
+#fancybox-wrap
+{
+    box-sizing: content-box;
+}
+
+
+.alert
+{
+    width: 400px;
+    overflow: hidden;
+    background: #fff;
+    @extend .center;
+    padding-bottom: 40px;
+    font-size: $big-font;
+
+    .head
+    {
+        font-size: 1.2em;
+        line-height: 2.8;
+        background: #f1f1f1;
+    }
+
+    .btn
+    {
+        margin: 0 6px;
+    }
+
+    .msg
+    {
+        line-height: 1.1;
+        padding: 50px 30px;
+    }
+}
+
+
+#tooltip
+{
+    $w: 300px;
+    padding: 10px;
+    width: $w;
+    @extend %ph_fixed;
+    top: 20%;
+    left: 50%;
+    margin-left: -$w / 2;
+    background: #000;
+    background: rgba(#f00, 0.7);
+    color: #fff;
+    visibility: hidden;
+    @extend .shadow;
+    @extend .transition;
+    @extend .center;
+    transform: translate3d(0, -20px, 0);
+    opacity: 0;
+    z-index: 999;
+
+    &.visible
+    {
+        visibility: visible;
+        transform: none;
+        opacity: 1;
+    }
+}
