@@ -22,7 +22,7 @@ $tooltip-width: 300px !default;
 
         .box
         {
-            transform: scale3d(1, 1, 1);
+            transform: none;
         }
     }
 
@@ -99,6 +99,7 @@ $tooltip-width: 300px !default;
         line-height: 1em;
         @extend .center;
         overflow: hidden;
+        font-family: sans-serif, Helvetica;
 
         &:hover
         {
