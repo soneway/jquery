@@ -23,25 +23,32 @@
         //配置项
         var data = opts.data || [],
             editable = opts.editable,
-            itemType = opts.itemType;
+            firstOpt = opts.firstOpt;
 
         //每个元素执行
         return this.each(function () {
 
             //变量
-            var $opener = $(this).addClass('pi-opener').wrap('<div class="pi-picker"></div>'),
+            var me = this,
+                $opener = $(me).addClass('pi-opener').wrap('<div class="pi-picker"></div>'),
                 $picker = $opener.parent('.pi-picker'), $ulBox, $ulRoot, $liRoot;
 
             //添加picker元素
             pickerEls.push($picker[0]);
 
             //刷新列表项函数
-            function refreshList(data) {
+            function refreshList(_data) {
+                data = _data;
+
                 //html
                 var html = '';
+
+                //第一个空选项
+                firstOpt && (html += '<li class="li-root" data-value="">' + firstOpt + '</li>');
+
                 for (var i = 0, len = data.length; i < len; i++) {
                     var item = data[i],
-                        isObj = itemType === 'object',
+                        isObj = typeof item === 'object',
                         val = isObj ? item.val : item,
                         txt = isObj ? item.txt : item;
 
@@ -51,8 +58,33 @@
                 $liRoot = $ulRoot.find('.li-root');
             }
 
-            //显露方法
-            $opener[0].refreshList = refreshList;
+            //设置值函数
+            function setValue(val) {
+                //设值为空时
+                if (val === '') {
+                    return $opener.attr('data-value', val).val(firstOpt);
+                }
+
+                for (var i = 0, len = data.length; i < len; i++) {
+                    var item = data[i],
+                        isObj = typeof item === 'object';
+
+                    //不为对象
+                    if (!isObj) {
+                        return $opener.attr('data-value', val).val(val);
+                    }
+
+                    //为对象
+                    if (item.val === val) {
+                        $opener.attr('data-value', val).val(item.txt);
+                        break;
+                    }
+                }
+            }
+
+            //暴露方法
+            me.refreshList = refreshList;
+            me.setValue = setValue;
 
 
             //初始化函数
@@ -67,6 +99,7 @@
                 //列表html
                 refreshList(data);
 
+
                 //初始化事件
                 initEvent();
             }
@@ -78,12 +111,17 @@
                 //root选项点击
                 $picker.on('click', '.li-root', function () {
                     var $this = $(this),
-                        txt = $this.attr('data-value');
+                        val = $this.attr('data-value'),
+                        txt = $this.text(),
+                        onpicked = me.onpicked;
 
                     //关闭box
                     $picker.removeClass('on');
                     //赋值
-                    $opener.val(txt);
+                    $opener.attr('data-value', val).val(txt);
+
+                    //回调
+                    typeof onpicked === 'function' && onpicked(val, txt, $this);
 
                     //二级列表选中状态
                     $liRoot.removeClass('selected');
@@ -108,8 +146,8 @@
         data    : null,
         //是否可编辑
         editable: false,
-        //数组项类型
-        itemType: 'object'
+        //第一个选项
+        firstOpt: ''
     };
 
 })(window, $);

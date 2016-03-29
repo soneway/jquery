@@ -1,13 +1,14 @@
 /*一级选择器*/
 //变量
-$pi-picker-height: $input-height !default;
+$hover-bgcolor: #eee !default;
+$main-color: #f00 !default;
+$border-color: #ddd !default;
 
 .pi-picker
 {
-    height: $pi-picker-height;
     display: inline-block;
-    vertical-align: middle;
     position: relative;
+    vertical-align: middle;
 
     &:after
     {
@@ -20,6 +21,7 @@ $pi-picker-height: $input-height !default;
         margin-top: -$w / 2;
         border: $w solid transparent;
         border-top-color: $color;
+        z-index: 1;
     }
 
     /*打开box*/
@@ -27,8 +29,7 @@ $pi-picker-height: $input-height !default;
     {
         .ul-box
         {
-            visibility: visible;
-            opacity: 1;
+            @extend %ph_visible;
             transform: none;
         }
 
@@ -40,9 +41,7 @@ $pi-picker-height: $input-height !default;
 
     .pi-opener
     {
-        background: none;
         position: relative;
-        z-index: 1;
         cursor: pointer;
         @extend .center;
         text-indent: -1em;
@@ -54,35 +53,30 @@ $pi-picker-height: $input-height !default;
 
         @extend %ph_absolute;
         left: 0;
-        top: $pi-picker-height;
+        top: 100%;
         width: 100%;
-        max-height: $lh * 5em;
+        max-height: $lh * 6em;
         line-height: $lh;
         background: #fff;
         overflow: auto;
         z-index: 5;
-        @extend .shadow;
+        border: 1px solid $border-color;
+        box-shadow: 1px 1px 3px rgba(#000, 0.1);
         //动画
         @extend .transition;
-        visibility: hidden;
-        opacity: 0;
+        @extend %ph_hidden;
         transform: scale3d(1, 0, 1);
         transform-origin: center top;
     }
 
-    .ul-root
-    {
-        border-right: 1px solid $border-color;
-    }
-
     .li-root
     {
-        text-indent: 1em;
+        @extend .center;
         cursor: pointer;
 
         &:hover
         {
-            background: $border-color;
+            background: $hover-bgcolor;
         }
 
         &.selected

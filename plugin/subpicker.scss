@@ -1,14 +1,14 @@
 /*二级选择器*/
 //变量
 $pi-subpicker-left-width: 100px !default;
-$pi-subpicker-height: $input-height !default;
-$pi-subpicker-width: 400px !default;
+$hover-bgcolor: #eee !default;
+$main-color: #f00 !default;
 
 .pi-subpicker
 {
     display: inline-block;
-    vertical-align: middle;
     position: relative;
+    vertical-align: middle;
 
     &:after
     {
@@ -21,6 +21,7 @@ $pi-subpicker-width: 400px !default;
         margin-top: -$w / 2;
         border: $w solid transparent;
         border-top-color: $color;
+        z-index: 1;
     }
 
     /*打开box*/
@@ -28,8 +29,7 @@ $pi-subpicker-width: 400px !default;
     {
         .ul-box
         {
-            visibility: visible;
-            opacity: 1;
+            @extend %ph_visible;
             transform: none;
         }
 
@@ -41,9 +41,7 @@ $pi-subpicker-width: 400px !default;
 
     .pi-opener
     {
-        background: none;
         position: relative;
-        z-index: 1;
         cursor: pointer;
         @extend .center;
         text-indent: -1em;
@@ -55,17 +53,18 @@ $pi-subpicker-width: 400px !default;
 
         @extend %ph_absolute;
         left: 0;
-        top: $pi-subpicker-height;
-        width: $pi-subpicker-width;
+        top: 100%;
+        width: 100%;
+        min-width: 400px;
         height: $lh * 5em;
         line-height: $lh;
         background: #fff;
         z-index: 5;
-        @extend .shadow;
+        border: 1px solid $border-color;
+        box-shadow: 1px 1px 3px rgba(#000, 0.1);
         //动画
         @extend .transition;
-        visibility: hidden;
-        opacity: 0;
+        @extend %ph_hidden;
         transform: scale3d(1, 0, 1);
         transform-origin: center top;
     }
@@ -74,6 +73,7 @@ $pi-subpicker-width: 400px !default;
     {
         height: 100%;
         overflow: auto;
+        @extend .fl;
         width: $pi-subpicker-left-width;
         border-right: 1px solid $border-color;
     }
@@ -84,7 +84,7 @@ $pi-subpicker-width: 400px !default;
         {
             .pk-root
             {
-                background: $border-color;
+                background: $hover-bgcolor;
             }
         }
 
@@ -112,7 +112,6 @@ $pi-subpicker-width: 400px !default;
     .ul-sub
     {
         display: none;
-        width: $pi-subpicker-width - $pi-subpicker-left-width;
         height: 100%;
         overflow: auto;
         @extend %ph_absolute;
@@ -129,7 +128,7 @@ $pi-subpicker-width: 400px !default;
 
         &:hover
         {
-            background: $border-color;
+            background: $hover-bgcolor;
         }
 
         &.selected

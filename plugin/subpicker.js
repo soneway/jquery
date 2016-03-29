@@ -31,7 +31,7 @@
         return this.each(function () {
 
             //变量
-            var $opener = $(this).addClass('pi-opener').attr('readonly', 'readonly').wrap('<div class="pi-subpicker"></div>'),
+            var $opener = $(this).addClass('pi-opener').wrap('<div class="pi-subpicker"></div>'),
                 $picker = $opener.parent('.pi-subpicker'), $ulRoot, $liRoot, $liSub;
 
             //添加picker元素
@@ -99,7 +99,7 @@
                     $opener.val(val);
 
                     //回调
-                    typeof picked === 'function' && picked($this, val);
+                    typeof picked === 'function' && picked(val, $this);
 
                     //二级列表选中状态
                     $liSub.removeClass('selected');
