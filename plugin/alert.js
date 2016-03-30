@@ -2,10 +2,10 @@
 (function (window, $) {
 
     //初始化html
-    var html = '<div id="alert" class="alert"><div class="box"><h2 class="head"></h2><p class="msg"></p><p><a class="btn btn_ok">确定</a></p></div></div>' +
-        '<div id="confirm" class="alert"><div class="box"><h2 class="head"></h2><p class="msg"></p><p><a class="btn btn_ok">确定</a><a class="btn btn_cancel">取消</a></p></div></div>' +
-        '<div id="modal" class="alert"><div class="box"><iframe frameborder="0"></iframe><a class="btn_close">╳</a></div></div>' +
-        '<div id="dialog" class="alert"><div class="box"><a class="btn_close">╳</a></div><div class="tempbox"></div></div>' +
+    var html = '<div id="alert"><div class="box"><h2 class="head"></h2><p class="msg"></p><p><a class="btn btn_ok">确定</a></p></div></div>' +
+        '<div id="confirm"><div class="box"><h2 class="head"></h2><p class="msg"></p><p><a class="btn btn_ok">确定</a><a class="btn btn_cancel">取消</a></p></div></div>' +
+        '<div id="modal"><div class="box"><iframe frameborder="0"></iframe><a class="btn_close">╳</a></div></div>' +
+        '<div id="dialog"><div class="box"><a class="btn_close">╳</a></div><div class="tempbox"></div></div>' +
         '<div id="tooltip"></div>';
     $(document.body).append(html);
 

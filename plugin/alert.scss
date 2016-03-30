@@ -59,30 +59,6 @@ $tooltip-width: 300px !default;
     {
         margin: 0 6px;
     }
-}
-
-
-/*提示框*/
-#alert, #confirm
-{
-    .box
-    {
-        top: 30%;
-        width: $alert-box-width;
-        margin-left: -$alert-box-width / 2;
-        @extend .center;
-        padding-bottom: 40px;
-    }
-}
-
-
-/*弹出页面和弹出窗口*/
-#modal, #dialog
-{
-    .box
-    {
-        top: 50%;
-    }
 
     /*关闭*/
     .btn_close
@@ -98,7 +74,6 @@ $tooltip-width: 300px !default;
         line-height: 1em;
         @extend .center;
         overflow: hidden;
-        font-family: sans-serif, Helvetica;
         z-index: 9;
 
         &:hover
@@ -106,6 +81,34 @@ $tooltip-width: 300px !default;
             background: #e42601;
             transform: rotateZ(90deg);
         }
+    }
+}
+
+
+/*提示框*/
+#alert, #confirm
+{
+    @extend .alert;
+
+    .box
+    {
+        top: 30%;
+        width: $alert-box-width;
+        margin-left: -$alert-box-width / 2;
+        @extend .center;
+        padding-bottom: 40px;
+    }
+}
+
+
+/*弹出页面和弹出窗口*/
+#modal, #dialog
+{
+    @extend .alert;
+
+    .box
+    {
+        top: 50%;
     }
 }
 
