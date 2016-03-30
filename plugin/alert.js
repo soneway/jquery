@@ -4,7 +4,8 @@
     //初始化html
     var html = '<div id="alert" class="alert"><div class="box"><h2 class="head"></h2><p class="msg"></p><p><a class="btn btn_ok">确定</a></p></div></div>' +
         '<div id="confirm" class="alert"><div class="box"><h2 class="head"></h2><p class="msg"></p><p><a class="btn btn_ok">确定</a><a class="btn btn_cancel">取消</a></p></div></div>' +
-        '<div id="dialog" class="alert"><div class="box"><iframe frameborder="0"></iframe><a class="btn_close">╳</a></div></div>' +
+        '<div id="modal" class="alert"><div class="box"><iframe frameborder="0"></iframe><a class="btn_close">╳</a></div></div>' +
+        '<div id="dialog" class="alert"><div class="box"><a class="btn_close">╳</a></div><div class="tempbox"></div></div>' +
         '<div id="tooltip"></div>';
     $(document.body).append(html);
 
@@ -82,21 +83,21 @@
     };
 
 
-    //dialog方法
-    var dialog = window.dialog = (function () {
-        var $dialog = $('#dialog'),
-            $box = $dialog.find('.box'),
-            $iframe = $dialog.find('iframe'),
+    //modal方法
+    var modal = window.modal = (function () {
+        var $modal = $('#modal'),
+            $box = $modal.find('.box'),
+            $iframe = $modal.find('iframe'),
             htmlEl = document.documentElement, opts;
 
         //关闭按钮点击
-        $dialog.on('click', '.btn_close', function () {
-            dialog.close();
+        $modal.on('click', '.btn_close', function () {
+            modal.close();
         });
 
         return function (_opts) {
             //配置项
-            opts = $.extend({}, dialog.defaults, _opts);
+            opts = $.extend({}, modal.defaults, _opts);
 
             //高度限定不超过窗口高度
             var wHeight = htmlEl.clientHeight;
@@ -116,6 +117,65 @@
             });
 
             //打开窗口
+            $modal.addClass('visible');
+
+            //关闭函数
+            modal.close = function () {
+                var onClose = opts.onClose;
+                typeof onClose === 'function' && onClose();
+
+                //关闭窗口
+                $modal.removeClass('visible');
+
+                //重置页面
+                setTimeout(function () {
+                    $iframe.attr('src', '');
+                }, parseFloat($modal.css('transition-duration')) * 1000);
+            };
+        };
+    })();
+    modal.defaults = {
+        width : 980,
+        height: 600
+    };
+
+
+    //dialog方法
+    var dialog = window.dialog = (function () {
+        var $dialog = $('#dialog'),
+            $box = $dialog.find('.box'),
+            $tempbox = $dialog.find('.tempbox'),
+            htmlEl = document.documentElement,
+            opts, elCache = {};
+
+        //关闭按钮点击
+        $dialog.on('click', '.btn_close', function () {
+            dialog.close();
+        });
+
+        return function (_opts) {
+            //配置项
+            opts = $.extend({}, dialog.defaults, _opts);
+
+            //显示的元素
+            var id = opts.id,
+                $el = elCache[id] || (elCache[id] = $('#' + id)),
+                width = $el[0].offsetWidth,
+                height = $el[0].offsetHeight;
+
+            //高度限定不超过窗口高度
+            var wHeight = htmlEl.clientHeight;
+            height > wHeight && (height = wHeight);
+
+            //设置位置尺寸
+            $box.css({
+                width        : width + 'px',
+                height       : height + 'px',
+                'margin-left': -width / 2 + 'px',
+                'margin-top' : -height / 2 + 'px'
+            }).append($el);
+
+            //打开窗口
             $dialog.addClass('visible');
 
             //关闭函数
@@ -126,15 +186,14 @@
                 //关闭窗口
                 $dialog.removeClass('visible');
 
-                //重置页面
-                $iframe.attr('src', '');
+                //重置内容
+                setTimeout(function () {
+                    $el.appendTo($tempbox);
+                }, parseFloat($dialog.css('transition-duration')) * 1000);
             };
         };
     })();
-    dialog.defaults = {
-        width : 980,
-        height: 600
-    };
+    dialog.defaults = {};
 
 
     //tooltip方法

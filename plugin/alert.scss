@@ -76,13 +76,12 @@ $tooltip-width: 300px !default;
 }
 
 
-/*弹出页面*/
-#dialog
+/*弹出页面和弹出窗口*/
+#modal, #dialog
 {
     .box
     {
         top: 50%;
-        line-height: 0;
     }
 
     /*关闭*/
@@ -100,12 +99,39 @@ $tooltip-width: 300px !default;
         @extend .center;
         overflow: hidden;
         font-family: sans-serif, Helvetica;
+        z-index: 9;
 
         &:hover
         {
             background: #e42601;
             transform: rotateZ(90deg);
         }
+    }
+}
+
+
+#modal
+{
+    .box
+    {
+        line-height: 0;
+    }
+}
+
+
+#dialog
+{
+    .box
+    {
+        & > *
+        {
+            @extend %ph_visible;
+        }
+    }
+
+    .tempbox
+    {
+        @extend %ph_hidden;
     }
 }
 
