@@ -130,7 +130,7 @@
 
 
                 //滚动事件
-                $(document).on('mousewheel', function (evt, delta) {
+                $scrollbox.on('mousewheel', function (evt, delta) {
                     //是否禁用
                     if ($.fn.scrollpage.defaults.disable) return;
 
