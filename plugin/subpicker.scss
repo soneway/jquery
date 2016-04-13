@@ -18,10 +18,9 @@ $main-color: #f00 !default;
         @extend %ph_absolute;
         top: 50%;
         right: 0.45em;
-        margin-top: -$w / 2;
+        margin-top: -$w / 4;
         border: $w solid transparent;
         border-top-color: $color;
-        z-index: 1;
     }
 
     /*打开box*/
@@ -44,7 +43,6 @@ $main-color: #f00 !default;
         position: relative;
         cursor: pointer;
         @extend .center;
-        text-indent: -1em;
     }
 
     .ul-box

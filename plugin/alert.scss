@@ -31,13 +31,13 @@ $tooltip-width: 300px !default;
     {
         @extend %ph_absolute;
         left: 50%;
+        top: 50%;
         overflow: hidden;
         box-shadow: 0 0 5px rgba(#000, 0.5);
         background: #fff;
         //动画
-        @extend .transition;
-        transition-property: opacity, transform;
-        transform: scale3d(0, 0, 1);
+        @extend .transform;
+        transform: scale3d(1.2, 1.2, 1);
     }
 
     /*标题*/
@@ -71,7 +71,7 @@ $tooltip-width: 300px !default;
         border-radius: 0.5em;
         background: #393a3c;
         width: 1em;
-        line-height: 1em;
+        line-height: 1;
         @extend .center;
         overflow: hidden;
         z-index: 9;
@@ -92,9 +92,9 @@ $tooltip-width: 300px !default;
 
     .box
     {
-        top: 30%;
         width: $alert-box-width;
         margin-left: -$alert-box-width / 2;
+        margin-top: -140px;
         @extend .center;
         padding-bottom: 40px;
     }
@@ -105,14 +105,10 @@ $tooltip-width: 300px !default;
 #modal, #dialog
 {
     @extend .alert;
-
-    .box
-    {
-        top: 50%;
-    }
 }
 
 
+/*弹出页面*/
 #modal
 {
     .box
@@ -122,6 +118,7 @@ $tooltip-width: 300px !default;
 }
 
 
+/*弹出窗口*/
 #dialog
 {
     .box
@@ -148,7 +145,7 @@ $tooltip-width: 300px !default;
     padding: 10px;
     width: $tooltip-width;
     margin-left: -$tooltip-width / 2;
-    background: rgba(#f00, 0.5);
+    background-color: #ef8f00;
     color: #fff;
     @extend .center;
     @extend .shadow;
@@ -157,6 +154,11 @@ $tooltip-width: 300px !default;
     @extend .transition;
     @extend %ph_hidden;
     transform: translate3d(0, -20px, 0);
+
+    &.ok
+    {
+        background-color: #68af02;
+    }
 
     &.visible
     {

@@ -25,10 +25,10 @@
             $alert.removeClass('visible');
         });
 
-        return function (_opts) {
+        return function (options) {
             //配置项
-            typeof _opts !== 'object' && (_opts = {msg: _opts});
-            opts = $.extend({}, alert.defaults, _opts);
+            typeof options !== 'object' && (options = {msg: options});
+            opts = $.extend({}, alert.defaults, options);
 
             //显示内容
             $head.html(opts.head);
@@ -65,9 +65,11 @@
             $confirm.removeClass('visible');
         });
 
-        return function (_opts) {
+        return function (options) {
             //配置项
-            opts = $.extend({}, confirm.defaults, _opts);
+            typeof options !== 'object' && (options = {msg: options});
+            //配置项
+            opts = $.extend({}, confirm.defaults, options);
 
             //设置内容
             $head.html(opts.head);
@@ -95,9 +97,10 @@
             modal.close();
         });
 
-        return function (_opts) {
+        return function (options) {
             //配置项
-            opts = $.extend({}, modal.defaults, _opts);
+            typeof options !== 'object' && (options = {href: options});
+            opts = $.extend({}, modal.defaults, options);
 
             //高度限定不超过窗口高度
             var wHeight = htmlEl.clientHeight;
@@ -136,7 +139,7 @@
     })();
     modal.defaults = {
         width : 980,
-        height: 600
+        height: 640
     };
 
 
@@ -153,13 +156,14 @@
             dialog.close();
         });
 
-        return function (_opts) {
+        return function (options) {
             //配置项
-            opts = $.extend({}, dialog.defaults, _opts);
+            typeof options !== 'object' && (options = {sel: options});
+            opts = $.extend({}, dialog.defaults, options);
 
             //显示的元素
-            var id = opts.id,
-                $el = elCache[id] || (elCache[id] = $('#' + id)),
+            var sel = opts.sel,
+                $el = elCache[sel] || (elCache[sel] = $(sel)),
                 width = $el[0].offsetWidth,
                 height = $el[0].offsetHeight;
 
@@ -201,8 +205,11 @@
         var $tooltip = $('#tooltip'),
             timeout;
 
-        return function (msg, time) {
+        return function (msg, isOk, time) {
             $tooltip.html(msg).addClass('visible');
+
+            //ok状态
+            isOk ? $tooltip.addClass('ok') : $tooltip.removeClass('ok');
 
             //定时隐藏
             clearTimeout(timeout);

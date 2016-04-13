@@ -18,10 +18,9 @@ $border-color: #ddd !default;
         @extend %ph_absolute;
         top: 50%;
         right: 0.45em;
-        margin-top: -$w / 2;
+        margin-top: -$w / 4;
         border: $w solid transparent;
         border-top-color: $color;
-        z-index: 1;
     }
 
     /*打开box*/
@@ -44,7 +43,6 @@ $border-color: #ddd !default;
         position: relative;
         cursor: pointer;
         @extend .center;
-        text-indent: -1em;
     }
 
     .ul-box
@@ -59,6 +57,7 @@ $border-color: #ddd !default;
         line-height: $lh;
         background: #fff;
         overflow: auto;
+        @extend .center;
         z-index: 5;
         border: 1px solid $border-color;
         box-shadow: 1px 1px 3px rgba(#000, 0.1);
@@ -71,7 +70,6 @@ $border-color: #ddd !default;
 
     .li-root
     {
-        @extend .center;
         cursor: pointer;
 
         &:hover

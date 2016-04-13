@@ -37,8 +37,8 @@
             pickerEls.push($picker[0]);
 
             //刷新列表项函数
-            function refreshList(_data) {
-                data = _data;
+            function refreshList(d) {
+                data = d;
 
                 //html
                 var html = '';
@@ -74,8 +74,8 @@
                         return $opener.attr('data-value', val).val(val);
                     }
 
-                    //为对象
-                    if (item.val === val) {
+                    //为对象(不用全等,避免数字和字符类型不一致导致不相等)
+                    if (item.val == val) {
                         $opener.attr('data-value', val).val(item.txt);
                         break;
                     }
